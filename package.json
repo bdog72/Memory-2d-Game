@@ -1,0 +1,23 @@
+{
+  "name": "memory-game",
+  "version": "1.0.0",
+  "description": "",
+  "main": "script.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bdog72/Memory-2d-Game.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/bdog72/Memory-2d-Game/issues"
+  },
+  "homepage": "https://github.com/bdog72/Memory-2d-Game#readme",
+  "devDependencies": {
+    "eslint": "^5.10.0"
+  }
+}
