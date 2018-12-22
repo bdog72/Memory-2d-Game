@@ -1,6 +1,9 @@
 // 1. Create and assign variables and retrieve the necessary HTML elements
+/* eslint-disable */
 var record = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 var imgRec = [];
+var images;
+// var status;
 var rand;
 var flipIndex = 0;
 var cardTextRec = [];
@@ -67,6 +70,7 @@ function cardClick(cardId) {
         flipIndex = 0;
 
         if (correct == 10) {
+          clearTimeout(countDown);
           setTimeout(function() {
             displayResult();
           }, 600);
@@ -116,8 +120,60 @@ function displayResult() {
 
 // 4. Make new game button work
 
+newGame = document.getElementById('new');
+newGame.addEventListener('click', newClick);
+
+function newClick() {
+  window.location.reload();
+}
+
 // 5. Randomize the game boxes on loading - also create images.js file here
 
-// 6. Create timer
+function newBoard() {
+  for (var i = 0; i < 20; i++) {
+    if (i == 0) {
+      rand = Math.round(Math.random() * images.length);
+      while (rand === images.length) {
+        rand = Math.round(Math.random() * images.length);
+      }
+      imgRec[i] = rand;
+    } else {
+      while (status == 0) {
+        rand = Math.round(Math.random() * images.length);
+        if (rand !== images.length) {
+          for (var j = 0; j < imgRec.length; j++) {
+            if (rand == imgRec[j]) {
+              break;
+            } else if (j == imgRec.length - 1) {
+              status = 1;
+              imgRec[i] = rand;
+            }
+          }
+        }
+      }
+    }
+    status = 0;
+    document.getElementById('back' + (i + 1)).innerHTML = images[rand];
+  }
+  startTimer(seconds);
+}
 
+// 6. Create timer
+function startTimer(secs) {
+  timer.innerHTML = '00:' + secs;
+  if (secs == 0) {
+    clearTimeout(countDown);
+    setTimeout(function() {
+      displayResult();
+    }, 800);
+    timer.innerHTML = '00:00';
+    return;
+  }
+  secs--;
+  countDown = setTimeout(function() {
+    startTimer(secs);
+  }, 1000);
+}
 // 7. Make the fancy display for results
+
+window.onload = newBoard();
